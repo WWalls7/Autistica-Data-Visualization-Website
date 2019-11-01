@@ -56,6 +56,7 @@
 
 <div id="MentalHealth" class="tabcontent">
     <h3>Mental Health</h3>
+    <canvas id = 'myChart' style = 'border:1px solid #000000'></canvas>
 </div>
 
 <div id="Confidence" class="tabcontent">
@@ -66,6 +67,7 @@
     <h3>Organisational Culture</h3>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
     function openCity(evt, cityName) {
         var i, tabcontent, tablinks;
@@ -84,6 +86,38 @@
     function getDate(){
 
     }
+</script>
+
+<script>
+var ctx = document.getElementById('myChart');
+
+    options = {
+        scale: {
+            angleLines: {
+                display: false
+            },
+            ticks: {
+                suggestedMin: 0,
+                suggestedMax: 10
+            }
+        }
+    };
+
+    var dataSet = {
+        labels: ["Mental Health", "Work Self Confidence", "Organisational Culture"],
+        datasets: [{
+            label: "entry",
+            backgroundColor: "rgba(0, 255, 0, 0.1)",
+            borderColor: "rgba(0, 255, 0, 1)",
+            data: [5, 4, 6]
+        }]
+    };
+
+    var radarChart = new Chart(ctx, {
+        type: 'radar',
+        data: dataSet,
+        options: options
+    });
 </script>
 
 </body>
