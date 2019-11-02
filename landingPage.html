@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<script>var text = window.location.hash.substring(1); //Username for the logged in User</script>
+<script>
+    var text = window.location.hash.substring(1); //Username for the logged in User
+    document.getElementById("adjustment").innerHTML = text;
+    </script>
 
 <div class="card" style="height:70">
     <img src="autistica.jpg" alt="Autistica logo" margin-left=90% width="250" height='70'>
@@ -61,6 +64,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
+    
+    
     function openGraph(evt, graphName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -84,11 +89,11 @@ var userMentalH;
 var userOrganisationalCulture;
 var userSelfConfidence;
 var userAdjustment;
-
+var text = window.location.hash.substring(1);
+console.log(text);
 function getMentalHealthData(x){
-
   d3.csv("Mental-health-Table1.csv", function(d){
-        if("22222222" == d.Username){
+        if(text == d.Username){
             return{
                 date : d.Date,
                 depression : +d.Depression,
@@ -109,11 +114,13 @@ function getMentalHealthData(x){
 function getOrganisationalCulture(x){
 
     d3.csv("Organisational-culture-Table1.csv", function(d){
+           if(text == d.Username){
+            return{
+                date : d.Date,
+                average : +d.Average
+            };
+           }
 
-    return{
-        date : d.Date,
-        average : +d.Average
-    };
 
     }).then(function(data){
         CultureDataSet.datasets[0].data = [data[x].average];
@@ -124,18 +131,20 @@ function getOrganisationalCulture(x){
 
   function getSelfConfidence(x){
       d3.csv("How_rate_your_confidence-Table1.csv", function(d){
+         if(text == d.Username){
+             return{
+                 date : d.Date,
+                 learning : +d.Learning,
+                 problemSolving : +d.Problemsolving,
+                 pressure : +d.Pressure,
+                 roleExpectation : +d.Roleexpectations,
+                 teamwork : +d.Teamwork,
+                 sensitivity : +d.Sensitivity,
+                 workPolitics : +d.Workpolitics
 
-      return{
-          date : d.Date,
-          learning : +d.Learning,
-          problemSolving : +d.Problemsolving,
-          pressure : +d.Pressure,
-          roleExpectation : +d.Roleexpectations,
-          teamwork : +d.Teamwork,
-          sensitivity : +d.Sensitivity,
-          workPolitics : +d.Workpolitics
+             };
+         }
 
-      };
 
       }).then(function(data){
           ConfidenceDataSet.datasets[0].data = [data[x].learning, data[x].problemSolving, data[x].pressure, data[x].roleExpectation, data[x].teamwork, data[x].sensitivity, data[x].workPolitics];
@@ -150,17 +159,22 @@ var questionLists =["Over the last week, or since you last completed this questi
 "If you have encountered any stories about autism in the media, could you describe them and its impact on you?",
 "Any other reflections that you would like to share? (please remember not to use real names of people you work with)"
 ];
+
   function getAdjustment(){
       d3.csv("Autistica-8211-Adjustments.csv", function(d){
+             
+         if(text == d.Username){
+             return{
+                 data : d.Date,
+                 q1 : d.Q1,
+                 q2 : d.Q2,
+                 q3 : d.Q3,
+                 q4 : d.Q4,
+                 q5 : d.Q5
+             };
+         
+         }
 
-      return{
-          data : d.Date,
-          q1 : d.Q1,
-          q2 : d.Q2,
-          q3 : d.Q3,
-          q4 : d.Q4,
-          q5 : d.Q5
-      };
 
       }).then(function(data){
           // do something here
