@@ -11,7 +11,7 @@
     <img src="autistica.jpg" alt="Autistica logo" style="float:right" width="250" max-width=100% height=auto>
     <h2>November 1, 2019</h2>
     <button class="button3" onclick="window.location.href = 'front_page_adjusted.html';">&#8592;</button>
-</div>]
+</div>
 
 <div class='column1'>
 <div class="tab">
@@ -173,8 +173,8 @@ var MentalHealthLineChart = new Chart(MentalHealthctx, {
             label: 'Series 1', // Name the series
             data: [3, 4, 2,	5, 9, 1, 2, 6, 2.5, 3, 7, 6], // Specify the data values array
             fill: false,
-            borderColor: '#2196f3', // Add custom color border (Line)
-            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            borderColor: 'rgb(178, 76, 90)', // Add custom color border (Line)
+            backgroundColor: 'rgb(178, 76, 90)', // Add custom color background (Points and Fill)
             borderWidth: 1 // Specify bar border width
         }]},
     options: {
@@ -183,16 +183,18 @@ var MentalHealthLineChart = new Chart(MentalHealthctx, {
     }
 });
 
+
+
 var ConfidenceLineChart = new Chart(Confidencectx, {
     type: 'line',
     data: {
         labels: ["January",	"February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        datasets: [{
-            label: 'Series 1', // Name the series
+        datasets: [{// Name the series
+            name: '',
             data: [3, 4, 2,	5, 9, 1, 2, 6, 2.5, 3, 7, 6], // Specify the data values array
             fill: false,
-            borderColor: '#2196f3', // Add custom color border (Line)
-            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            borderColor: 'rgb(233, 185, 165)', // Add custom color border (Line)
+            backgroundColor: 'rgb(233, 185, 165)', // Add custom color background (Points and Fill)
             borderWidth: 1 // Specify bar border width
         }]},
     options: {
@@ -209,8 +211,8 @@ var CultureLineChart = new Chart(Culturectx, {
             label: 'Series 1', // Name the series
             data: [3, 4, 2,	5, 9, 1, 2, 6, 2.5, 3, 7, 6], // Specify the data values array
             fill: false,
-            borderColor: '#2196f3', // Add custom color border (Line)
-            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            borderColor: 'rgb(157, 213, 203)', // Add custom color border (Line)
+            backgroundColor: 'rgb(157, 213, 203)', // Add custom color background (Points and Fill)
             borderWidth: 1 // Specify bar border width
         }]},
     options: {
@@ -267,10 +269,10 @@ var CultureLineChart = new Chart(Culturectx, {
               label: 'Average',
               data: [9],
               backgroundColor: [
-                'rgba(255, 99, 132, 0.2)'
+                'rgba(233, 185, 165, 0.3)'
               ],
               borderColor: [
-                'rgba(255,99,132,1)',
+                'rgba(233, 185, 165, 1)',
               ],
               borderWidth: 1
             }]
