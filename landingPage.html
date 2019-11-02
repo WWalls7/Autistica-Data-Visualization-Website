@@ -176,23 +176,10 @@ var MentalHealthctx = document.getElementById("MentalHealthLineChart").getContex
 var Confidencectx = document.getElementById("ConfidenceLineChart").getContext('2d');
 var Culturectx = document.getElementById("CultureLineChart").getContext('2d');
 
-
-var MentalHealthLineChart = new Chart(MentalHealthctx, {
+var myLineChart = new Chart(ctx, {
     type: 'line',
-    data: {
-        labels: ["January",	"February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        datasets: [{
-            label: 'Series 1', // Name the series
-            data: [3, 4, 2,	5, 9, 1, 2, 6, 2.5, 3, 7, 6], // Specify the data values array
-            fill: false,
-            borderColor: '#2196f3', // Add custom color border (Line)
-            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        }]},
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
-    }
+    data: data,
+    options: options
 });
 
 var ConfidenceLineChart = new Chart(Confidencectx, {
