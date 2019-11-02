@@ -152,6 +152,12 @@ button:hover {
   border-radius: .25rem;
 }
 
+.graphCard {
+  background-color: rgb(235, 235, 237);
+  margin: 5px;
+  border-radius: .25rem;
+}
+
 /* Clear floats after the columns */
 .row:after {
   content: "";
