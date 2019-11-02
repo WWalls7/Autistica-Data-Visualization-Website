@@ -99,6 +99,7 @@ function getMentalHealthData(x){
 
    }).then(function(data) {
        MentalHealthDataSet.datasets[0].data = [data[x].depression, data[x].anxiety, data[x].stress];
+
        MentalHealthRadarChart.update();
       // do something
    });
@@ -115,7 +116,7 @@ function getOrganisationalCulture(x){
 
     }).then(function(data){
         // do something here
-        CultureDataSet = data[1].data = data[x].average;
+        CultureDataSet.datasets[0].data = [data[x].average];
         CultureBarChart.update();
     });
 }
@@ -277,7 +278,6 @@ var CultureLineChart = new Chart(Culturectx, {
     getSelfConfidence(24);
 
     var CultureDataSet = {
-        data: {
             datasets: [{
                 barPercentage: 0.5,
                 barThickness: 6,
@@ -285,7 +285,6 @@ var CultureLineChart = new Chart(Culturectx, {
                 minBarLength: 2,
                 data: []
             }]
-        }
     };
 
     getOrganisationalCulture(24);
