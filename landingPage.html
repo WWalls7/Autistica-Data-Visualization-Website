@@ -26,7 +26,6 @@
         <h3>Mental Health</h3>
         <canvas id = 'MentalHealthChart'></canvas>
        <input type="range" min="1" max="25" value="25" class="slider" id="MentalHealthSlider">
-        <canvas id = 'MentalHealthLineChart'></canvas>
     </div>
 </div>
 
@@ -35,15 +34,12 @@
     <h3>Work Self Confidence</h3>
     <canvas id = 'ConfidenceChart'></canvas>
     <input type="range" min="1" max="25" value="25" class="slider" id="ConfidenceSlider">
-    <canvas id = 'ConfidenceLineChart'></canvas>
   </div>
 </div>
 
 <div id="Culture" class="tabcontent">
   <div class='card'>
     <h3>Organisational Culture</h3>
-    <canvas id = 'CultureChart'></canvas>
-    <input type="range" min="1" max="25" value="25" class="slider" id="CultureSlider">
     <canvas id = 'CultureLineChart'></canvas>
   </div>
 </div>
@@ -97,10 +93,9 @@ function getMentalHealthData(x){
 
         }
 
-
    }).then(function(data){
-       MentalHealthDataSet.datasets[0].data = [data[x].depression, data[x].anxiety, data[x].stress];
-       MentalHealthRadarChart.update();
+        MentalHealthDataSet.datasets[0].data = [data[x].depression, data[x].anxiety, data[x].stress];
+        MentalHealthRadarChart.update();
       // do something
    });
 }
@@ -167,8 +162,6 @@ var questionLists =["Over the last week, or since you last completed this questi
               questionLists[4] + "<br><br>" + data[0].q5;
 
 
-
-
       });
 
 
@@ -178,30 +171,7 @@ getAdjustment();
 
 var MentalHealthChartVar = document.getElementById('MentalHealthChart');
 var ConfidenceChartVar = document.getElementById('ConfidenceChart');
-var CultureChartVar = document.getElementById('CultureChart');
-
-var MentalHealthctx = document.getElementById("MentalHealthLineChart").getContext('2d');
-var Confidencectx = document.getElementById("ConfidenceLineChart").getContext('2d');
 var Culturectx = document.getElementById("CultureLineChart").getContext('2d');
-
-
-var ConfidenceLineChart = new Chart(Confidencectx, {
-    type: 'line',
-    data: {
-        labels: ["January",	"February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        datasets: [{// Name the series
-            name: '',
-            data: [3, 4, 2,	5, 9, 1, 2, 6, 2.5, 3, 7, 6], // Specify the data values array
-            fill: false,
-            borderColor: 'rgb(233, 185, 165)', // Add custom color border (Line)
-            backgroundColor: 'rgb(233, 185, 165)', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        }]},
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
-    }
-});
 
 var CultureLineChart = new Chart(Culturectx, {
     type: 'line',
@@ -228,18 +198,20 @@ var CultureLineChart = new Chart(Culturectx, {
             },
             ticks: {
                 suggestedMin: 0,
-                suggestedMax: 10
+                suggestedMax: 18
             }
         }
     };
 
-    baroptions = {
-        scales: {
-            xAxes: [{
-                gridLines: {
-                    offsetGridLines: true
-                }
-            }]
+    options2 = {
+        scale: {
+            angleLines: {
+                display: false
+            },
+            ticks: {
+                suggestedMin: 0,
+                suggestedMax: 3.5
+            }
         }
     };
 
@@ -267,33 +239,16 @@ var CultureLineChart = new Chart(Culturectx, {
 
     getSelfConfidence(24);
 
-    var CultureDataSet = {
-        datasets: [{
-            label: "entry",
-            backgroundColor: "rgba(157, 213, 203, 1)",
-            borderColor: "rgba(157, 213, 203, 1)",
-            data: []
-        }]
-    }
-
-    getOrganisationalCulture(24);
-
     var MentalHealthRadarChart = new Chart(MentalHealthChartVar, {
         type: 'radar',
         data: MentalHealthDataSet,
         options: options
     });
 
-    var CultureBarChart = new Chart(CultureChartVar, {
-        type: 'bar',
-        data: CultureDataSet,
-        options: baroptions
-    });
-
     var ConfidenceRadarChart = new Chart(ConfidenceChartVar, {
         type: 'radar',
         data: ConfidenceDataSet,
-        options: options
+        options: options2
     });
 
     var slider = document.getElementById('MentalHealthSlider');
@@ -305,11 +260,6 @@ var CultureLineChart = new Chart(Culturectx, {
     var slider2 = document.getElementById('ConfidenceSlider');
     slider2.oninput=function() {
        getSelfConfidence(slider2.value-1);
-    }
-
-    var slider3 = document.getElementById('CultureSlider');
-    slider3.oninput=function() {
-        getOrganisationalCulture(slider3.value-1);
     }
 </script>
 
