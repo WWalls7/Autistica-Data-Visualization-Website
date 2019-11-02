@@ -9,8 +9,8 @@
 <script>var text = window.location.hash.substring(1); //Username for the logged in User</script>
 
 <div class="card" style="height:70">
-    <img src="autistica.jpg" alt="Autistica logo" width="250" height='70'>
-    <button class="button3" onclick="window.location.href = 'front_page_adjusted.html';" >&#8592;</button>
+    <img src="autistica.jpg" alt="Autistica logo" margin-left=90% width="250" height='70'>
+    <button class="button3" onclick="window.location.href = 'front_page_adjusted.html';">&#8592;</button>
 </div>
 
 <div class='column1'>
@@ -20,10 +20,10 @@
     <button class="tablinks" onclick="openGraph(event, 'Confidence')">Work Self Confidence</button>
     <button class="tablinks" onclick="openGraph(event, 'Culture')">Organisational Culture</button>
 </div>
-<h3>November 1, 2019</h3>
+<h2>November 1, 2019</h2>
 
 <div id="MentalHealth" class="tabcontent" style="display: block">
-    <div class='graphCard'>
+    <div class='card'>
         <h3>Mental Health</h3>
         <canvas id = 'MentalHealthChart'></canvas>
        <input type="range" min="1" max="25" value="25" class="slider" id="MentalHealthSlider">
@@ -32,7 +32,7 @@
 </div>
 
 <div id="Confidence" class="tabcontent">
-  <div class='graphCard'>
+  <div class='card'>
     <h3>Work Self Confidence</h3>
     <canvas id = 'ConfidenceChart'></canvas>
     <input type="range" min="1" max="25" value="25" class="slider" id="ConfidenceSlider">
@@ -41,7 +41,7 @@
 </div>
 
 <div id="Culture" class="tabcontent">
-  <div class='graphCard'>
+  <div class='card'>
     <h3>Organisational Culture</h3>
     <canvas id = 'CultureChart'></canvas>
     <input type="range" min="1" max="25" value="25" class="slider" id="CultureSlider">
@@ -245,7 +245,6 @@ var CultureLineChart = new Chart(Culturectx, {
     };
 
     var MentalHealthDataSet = {
-
         labels: ["Depression", "Anxiety", "Stress"],
         datasets: [{
             label: "entry",
