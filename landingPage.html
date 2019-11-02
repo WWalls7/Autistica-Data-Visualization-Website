@@ -50,9 +50,9 @@
 </div>
 
 <div class='column2'>
-  <div class='card'>
+    <div class='card' style="margin-left: 10px;">
     <h3>Adjustment</h3>
-    <p id="adjustment">fs</p>
+    <p id="adjustment" style="font-size:18px"></p>
   </div>
 </div>
 
@@ -141,7 +141,12 @@ function getOrganisationalCulture(){
       });
 
   }
-
+var questionLists =["Over the last week, or since you last completed this question, please provide reflections about any misunderstandings you have experienced in the workplace, why you think they occurred, and how you think they were (or could be) successfully resolved? (please remember not to use real names of people you work with)",
+"Over the last week, or since you last completed this question, please provide reflections about any successes you have experienced in the workplace? (please remember not to use real names of people you work with)",
+"Please describe any adjustments (i.e. physcial changes to your workspace, management changes to the processes for completing tasks, or logistical changes to working hours or transport to work)",
+"If you have encountered any stories about autism in the media, could you describe them and its impact on you?",
+"Any other reflections that you would like to share? (please remember not to use real names of people you work with)"
+];
   function getAdjustment(){
       d3.csv("Autistica-8211-Adjustments.csv", function(d){
 
@@ -156,15 +161,18 @@ function getOrganisationalCulture(){
 
       }).then(function(data){
           // do something here
-            
-        document.getElementById("adjustment").innerHTML = "dsadsdsa";
+      document.getElementById("adjustment").innerHTML = questionLists[0] + "<br><br>" + data[0].q1 + "<br><br><br><br>" + questionLists[1] + "<br><br>" + data[0].q2 + "<br><br><br><br>" + questionLists[2] + "<br><br>" + data[0].q4 + "<br><br><br><br>" + questionLists[3] + "<br><br>" + data[0].q4 + "<br><br><br><br>" +
+              questionLists[4] + "<br><br>" + data[0].q5;
+
+                
+              
               
       });
       
 
   }
-    document.getElementById("adjustment").innerHTML = "dsadsdsa";
 
+getAdjustment();
 
 var MentalHealthChartVar = document.getElementById('MentalHealthChart');
 var ConfidenceChartVar = document.getElementById('ConfidenceChart');
