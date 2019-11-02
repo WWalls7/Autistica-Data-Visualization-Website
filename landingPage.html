@@ -15,6 +15,7 @@
         /* Style the buttons inside the tab */
         .tab button {
             background-color: inherit;
+            width: 33.3333333333333333333333333333333333333333333333333333333333333333333%;
             float: left;
             border: none;
             outline: none;
@@ -38,38 +39,80 @@
         .tabcontent {
             display: none;
             padding: 6px 12px;
-            border: 1px solid #ccc;
             border-top: none;
+        }
+
+        .content {
+
+        }
+
+        .column1 {
+            float: left;
+            width: 75%;
+            padding: 0px;
+        }
+        .column2 {
+            float: left;
+            width: 24%;
+            padding: 0px;
+            border: 1px solid #ccc;
+        }
+
+        .row:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        @media screen and (max-width:600px) {
+            .column1 {
+                width: 100%;
+            }
+            .column2 {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
 
-<h2>Questionnaire Results</h2>
-<p>Date: </p>
+<h1>My DARE</h1>
+<h2>November 1, 2019</h2>
 
+
+
+<div class='column1'>
 <div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'MentalHealth')">Mental Health</button>
-    <button class="tablinks" onclick="openCity(event, 'Confidence')">Work Self Confidence</button>
-    <button class="tablinks" onclick="openCity(event, 'Culture')">Organisational Culture</button>
+    <button class="tablinks" onclick="openGraph(event, 'MentalHealth')">Mental Health</button>
+    <button class="tablinks" onclick="openGraph(event, 'Confidence')">Work Self Confidence</button>
+    <button class="tablinks" onclick="openGraph(event, 'Culture')">Organisational Culture</button>
 </div>
 
 <div id="MentalHealth" class="tabcontent">
     <h3>Mental Health</h3>
-    <canvas id = 'myChart' style = 'border:1px solid #000000'></canvas>
+    <canvas id = 'MentalHealthChart'></canvas>
 </div>
 
 <div id="Confidence" class="tabcontent">
     <h3>Work Self Confidence</h3>
+    <canvas id = 'ConfidenceChart'></canvas>
 </div>
 
 <div id="Culture" class="tabcontent">
     <h3>Organisational Culture</h3>
+    <canvas id = 'CultureChart'></canvas>
 </div>
+</div>
+
+<div class='column2'>
+    <h3 style="padding-left: 10px">Adjustment</h3>
+    <p style='padding-left: 10px'>Text Here</p>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
-    function openCity(evt, cityName) {
+    function openGraph(evt, graphName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
@@ -79,7 +122,7 @@
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
-        document.getElementById(cityName).style.display = "block";
+        document.getElementById(graphName).style.display = "block";
         evt.currentTarget.className += " active";
     }
 
@@ -89,7 +132,9 @@
 </script>
 
 <script>
-var ctx = document.getElementById('myChart');
+var MentalHealthChartVar = document.getElementById('MentalHealthChart');
+var ConfidenceChartVar = document.getElementById('ConfidenceChart');
+var CultureChartVar = document.getElementById('CultureChart');
 
     options = {
         scale: {
@@ -103,19 +148,51 @@ var ctx = document.getElementById('myChart');
         }
     };
 
-    var dataSet = {
+    var MentalHealthDataSet = {
         labels: ["Mental Health", "Work Self Confidence", "Organisational Culture"],
         datasets: [{
             label: "entry",
-            backgroundColor: "rgba(0, 255, 0, 0.1)",
-            borderColor: "rgba(0, 255, 0, 1)",
+            backgroundColor: "rgba(178, 76, 90, 0.1)",
+            borderColor: "rgba(178, 76, 90, 1)",
             data: [5, 4, 6]
         }]
     };
 
-    var radarChart = new Chart(ctx, {
+    var ConfidenceDataSet = {
+        labels: ["Mental Health", "Work Self Confidence", "Organisational Culture"],
+        datasets: [{
+            label: "entry",
+            backgroundColor: "rgba(233, 185, 165, 0.1)",
+            borderColor: "rgba(233, 185, 165, 1)",
+            data: [5, 4, 6]
+        }]
+    };
+
+    var OrganisationalDataSet = {
+        labels: ["Mental Health", "Work Self Confidence", "Organisational Culture"],
+        datasets: [{
+            label: "entry",
+            backgroundColor: "rgba(178, 76, 90, 0.1)",
+            borderColor: "rgba(178, 76, 90, 1)",
+            data: [5, 4, 6]
+        }]
+    };
+
+    var MentalHealthRadarChart = new Chart(MentalHealthDataSet, {
         type: 'radar',
-        data: dataSet,
+        data: MentalHealthDataSet,
+        options: options
+    });
+
+    var ConfidenceRadarChart = new Chart(ctx, {
+        type: 'radar',
+        data: MentalHealthDataSet,
+        options: options
+    });
+
+    var CultureRadarChart = new Chart(ctx, {
+        type: 'radar',
+        data: MentalHealthDataSet,
         options: options
     });
 </script>
