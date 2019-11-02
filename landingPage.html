@@ -70,6 +70,7 @@ var userMentalH;
 var userOrganisationalCulture;
 var userSelfConfidence;
 var userAdjustment;
+
 function getMentalHealthData(){
 
   d3.csv("Mental-health-Table1.csv", function(d){
@@ -83,22 +84,24 @@ function getMentalHealthData(){
 
    }).then(function(data){
        MentalHealthDataSet.datasets[0].data = [data.depression, data.anxiety, data.stress];
+       MentalHealthRadarChart.update();
       // do something
    });
 }
 
-  function getOrganisationalCulture(){
-      d3.csv("Organisational-culture-Table1.csv", function(d){
+function getOrganisationalCulture(){
 
-      return{
-          data : d.Date,
-          average : +d.Average
-      };
+    d3.csv(("Organisational-culture-Table1.csv").url(), function(d){
 
-      }).then(function(data){
-          // do something here
-      });
-  }
+    return{
+        data : d.Date,
+        average : +d.Average
+    };
+
+    }).then(function(data){
+        // do something here
+    });
+}
 
   function getSelfConfidence(){
       d3.csv("How_rate_your_confidence-Table1.csv", function(d){
@@ -116,6 +119,7 @@ function getMentalHealthData(){
       };
 
       }).then(function(data){
+
       // do something here
       });
 
