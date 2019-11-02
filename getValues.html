@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
   <link href="values.css" rel="stylesheet">
-  <title>Login</title>
+  <title style="font-style: bold">Login</title>
 </head>
 
 <body>
@@ -15,7 +15,9 @@
 
     function getData(){
       d3.csv("Participant-attribute-data.csv").then(function(data) {
+        console.log(data);
         validateForm(data);
+
       });
     }
 
@@ -27,7 +29,7 @@
     var found = false;
     for (i = 0; i < data.length; i++) {
       if ((un == data[i].Email) && (pw == data[i].Password)) {
-        window.location.href = "front_page_adjusted.html";
+        window.location.href = "front_page_adjusted.html" + "#" + data[i].Username;
         found = true;
       }
     }
@@ -39,15 +41,13 @@
 
 </script>
 
-
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
+<div class="card">
+  <img src="autistica.jpg" alt="Autistica logo" style="float:right" width="250" max-width=100% height=auto>
+  <div class="row" >
+    <div class="col-md-8" >
       <div id="login">
         <div class="page-header">
-          <h3>Login</h3>
+          <h3 colour = white>Login</h3>
         </div>
 
         <form name="myForm" onsubmit="return getData()" role="form" method="post">
