@@ -12,31 +12,50 @@
 <body>
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script>
-  d3.csv("Participant-attribute-data1.csv", function(d) {
-    return {
-      username : d.Username,
-      email : d.Email,
-      password : +d.Password
-    };
-  }).then(function(data) {
-    console.log(data[0]);
-  });
+//   d3.csv("Participant-attribute-data1.csv", function(d) {
+//     return {
+//       username : d.Username,
+//       email : d.Email,
+//       password : +d.Password
+//     };
+//   }).then(function(data) {
+//     console.log(data[0]);
+//   });
 
   function validateForm() {
     var un = document.myForm.inputEmail.value;
     var pw = document.myForm.inputPassword.value;
     var username = "username";
     var password = "password";
-    var access = false;
-    if ((un == username) && (pw == password)) {
-      access = true;
-    }
-    else {
-      alert ("Login was unsuccessful, please check your username and password");
-    }
-    if(access == true){
+    
+    d3.csv("Participant-attribute-data.csv", function(d) {
+    
 
-    }
+		if(un == d.Email && pw == d.Password){
+			return{
+				username : d.Username
+			};
+		}
+    	
+//     return {
+//       username : d.Username,
+//       email : d.Email,
+//       password : +d.Password
+//     };
+  	}).then(function(data) {
+    	console.log(data[0]);
+  	});
+  
+//     var access = false;
+//     if ((un == "1@email.co.uk1") && (pw == "111")) {
+//        console.log("fwf");
+//     }
+//     else {
+//       alert ("Login was unsuccessful, please check your username and password");
+//     }
+//     if(access == true){
+// 
+//     }
   }
 
 
@@ -49,7 +68,7 @@
           <div class="page-header">
             <h3>Login</h3>
           </div>
-          <form name="myForm" action="hello.html" onsubmit="return validateForm()" role="form" method="post">
+          <form name="myForm" action="hello.html" onsubmit="return validateForm()" role="form">
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">Email</label>
               <div class="col-sm-10">
