@@ -127,7 +127,7 @@ function getOrganisationalCulture(x){
     }).then(function(data){
         CultureDataSet.datasets[0].data = [data[x].average];
         CultureBarChart.update();
-            document.getElementById("date").innerHTML = data[x].date;
+        document.getElementById("date").innerHTML = data[x].date;
 
         // do something here
     });
@@ -218,7 +218,7 @@ var ConfidenceLineChart = new Chart(Confidencectx, {
             backgroundColor: 'rgb(233, 185, 165)', // Add custom color background (Points and Fill)
             borderWidth: 1 // Specify bar border width
         }]},
-    options: {
+    options2: {
       responsive: true, // Instruct chart js to respond nicely.
       maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
     }
@@ -253,6 +253,18 @@ var CultureLineChart = new Chart(Culturectx, {
             }
         }
     };
+
+options2 = {
+    scale: {
+        angleLines: {
+            display: false
+        },
+        ticks: {
+            suggestedMin: 0,
+            suggestedMax: 4
+        }
+    }
+};
 
     baroptions = {
         scales: {
@@ -316,7 +328,7 @@ var CultureLineChart = new Chart(Culturectx, {
     var ConfidenceRadarChart = new Chart(ConfidenceChartVar, {
         type: 'radar',
         data: ConfidenceDataSet,
-        options: options
+        options: options2
     });
 
     var slider = document.getElementById('MentalHealthSlider');
