@@ -169,7 +169,19 @@ button:hover {
   display: inline-block;
   font-size: 16px;
 }
+
 .button2 {background-color: #016171;}
+
+.button3 {
+	background-color: rgb(178,76,90);
+  	color: white;
+  	padding: 6px 10px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	border: none;
+  	font-size: 16px;
+}
 
 .large_font{
 	font-size: 25pt;
