@@ -3,9 +3,11 @@
 <head>
 <link rel="stylesheet" href="values.css">
 <body>
+  <div class="card">
 <img src="autistica.jpg" alt="Autistica logo" style="float:right" width="250" max-width=100% height=auto>
 <div class="header" align ="right">
   <h1>DAREreview</h1>
+</div>
 </div>
 
 <div class="row">
@@ -39,10 +41,7 @@
         <span class="small_font">
         questionaires in total.
         </span>
-
-
     </div>
-
   </div>
 </div>
 
@@ -53,11 +52,11 @@
     return time;
   }
   if(test()<=12){
-    document.getElementById("demo").innerHTML = "Good morning";
+    document.getElementById("demo").innerHTML = "Good morning!";
   } else if(test()>12&& test()<=18){
-      document.getElementById("demo").innerHTML = "Good afternoon";
+      document.getElementById("demo").innerHTML = "Good afternoon!";
   } else{
-      document.getElementById("demo").innerHTML = "Good night";
+      document.getElementById("demo").innerHTML = "Good night!";
   }
 
   function logic1(){

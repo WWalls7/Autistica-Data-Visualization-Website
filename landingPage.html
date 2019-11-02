@@ -4,21 +4,22 @@
     <link rel="stylesheet" href="values.css">
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-</head
+</head>
 <body>
 
-<div class="card">
-    <img src="autistica.jpg" alt="Autistica logo" style="float:right" width="250" max-width=100% height=auto>
-    <h2>November 1, 2019</h2>
+<div class="card" style="height:70">
+    <img src="autistica.jpg" alt="Autistica logo" margin-left=10% width="250" height='70'>
     <button class="button3" onclick="window.location.href = 'front_page_adjusted.html';">&#8592;</button>
-</div>]
+</div>
 
 <div class='column1'>
+  <div class='card'>
 <div class="tab">
     <button class="tablinks" onclick="openGraph(event, 'MentalHealth')">Mental Health</button>
     <button class="tablinks" onclick="openGraph(event, 'Confidence')">Work Self Confidence</button>
     <button class="tablinks" onclick="openGraph(event, 'Culture')">Organisational Culture</button>
 </div>
+<h2>November 1, 2019</h2>
 
 <div id="MentalHealth" class="tabcontent" style="display: block">
     <div class='card'>
@@ -46,13 +47,13 @@
     <canvas id = 'CultureLineChart'></canvas>
   </div>
 </div>
-
+</div>
 </div>
 
 <div class='column2'>
-  <div class='card'>
+    <div class='card' style="margin-left: 10px;">
     <h3>Adjustment</h3>
-    <p id="adjustment">fs</p>
+    <p id="adjustment" style="font-size:18px"></p>
   </div>
 </div>
 
@@ -97,9 +98,8 @@ function getMentalHealthData(x){
         }
 
 
-   }).then(function(data) {
+   }).then(function(data){
        MentalHealthDataSet.datasets[0].data = [data[x].depression, data[x].anxiety, data[x].stress];
-
        MentalHealthRadarChart.update();
       // do something
    });
@@ -115,9 +115,9 @@ function getOrganisationalCulture(x){
     };
 
     }).then(function(data){
-        // do something here
         CultureDataSet.datasets[0].data = [data[x].average];
         CultureBarChart.update();
+        // do something here
     });
 }
 
@@ -143,7 +143,12 @@ function getOrganisationalCulture(x){
       });
 
   }
-
+var questionLists =["Over the last week, or since you last completed this question, please provide reflections about any misunderstandings you have experienced in the workplace, why you think they occurred, and how you think they were (or could be) successfully resolved? (please remember not to use real names of people you work with)",
+"Over the last week, or since you last completed this question, please provide reflections about any successes you have experienced in the workplace? (please remember not to use real names of people you work with)",
+"Please describe any adjustments (i.e. physcial changes to your workspace, management changes to the processes for completing tasks, or logistical changes to working hours or transport to work)",
+"If you have encountered any stories about autism in the media, could you describe them and its impact on you?",
+"Any other reflections that you would like to share? (please remember not to use real names of people you work with)"
+];
   function getAdjustment(){
       d3.csv("Autistica-8211-Adjustments.csv", function(d){
 
@@ -158,15 +163,18 @@ function getOrganisationalCulture(x){
 
       }).then(function(data){
           // do something here
+      document.getElementById("adjustment").innerHTML = questionLists[0] + "<br><br>" + data[0].q1 + "<br><br><br><br>" + questionLists[1] + "<br><br>" + data[0].q2 + "<br><br><br><br>" + questionLists[2] + "<br><br>" + data[0].q4 + "<br><br><br><br>" + questionLists[3] + "<br><br>" + data[0].q4 + "<br><br><br><br>" +
+              questionLists[4] + "<br><br>" + data[0].q5;
 
-        document.getElementById("adjustment").innerHTML = "dsadsdsa";
+
+
 
       });
 
 
   }
-    document.getElementById("adjustment").innerHTML = "dsadsdsa";
 
+getAdjustment();
 
 var MentalHealthChartVar = document.getElementById('MentalHealthChart');
 var ConfidenceChartVar = document.getElementById('ConfidenceChart');
@@ -177,34 +185,16 @@ var Confidencectx = document.getElementById("ConfidenceLineChart").getContext('2
 var Culturectx = document.getElementById("CultureLineChart").getContext('2d');
 
 
-var MentalHealthLineChart = new Chart(MentalHealthctx, {
-    type: 'line',
-    data: {
-        labels: ["January",	"February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        datasets: [{
-            label: 'Series 1', // Name the series
-            data: [3, 4, 2,	5, 9, 1, 2, 6, 2.5, 3, 7, 6], // Specify the data values array
-            fill: false,
-            borderColor: '#2196f3', // Add custom color border (Line)
-            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        }]},
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
-    }
-});
-
 var ConfidenceLineChart = new Chart(Confidencectx, {
     type: 'line',
     data: {
         labels: ["January",	"February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        datasets: [{
-            label: 'Series 1', // Name the series
+        datasets: [{// Name the series
+            name: '',
             data: [3, 4, 2,	5, 9, 1, 2, 6, 2.5, 3, 7, 6], // Specify the data values array
             fill: false,
-            borderColor: '#2196f3', // Add custom color border (Line)
-            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            borderColor: 'rgb(233, 185, 165)', // Add custom color border (Line)
+            backgroundColor: 'rgb(233, 185, 165)', // Add custom color background (Points and Fill)
             borderWidth: 1 // Specify bar border width
         }]},
     options: {
@@ -221,8 +211,8 @@ var CultureLineChart = new Chart(Culturectx, {
             label: 'Series 1', // Name the series
             data: [3, 4, 2,	5, 9, 1, 2, 6, 2.5, 3, 7, 6], // Specify the data values array
             fill: false,
-            borderColor: '#2196f3', // Add custom color border (Line)
-            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            borderColor: 'rgb(157, 213, 203)', // Add custom color border (Line)
+            backgroundColor: 'rgb(157, 213, 203)', // Add custom color background (Points and Fill)
             borderWidth: 1 // Specify bar border width
         }]},
     options: {
@@ -278,22 +268,15 @@ var CultureLineChart = new Chart(Culturectx, {
     getSelfConfidence(24);
 
     var CultureDataSet = {
-            datasets: [{
-                barPercentage: 0.5,
-                barThickness: 6,
-                maxBarThickness: 8,
-                minBarLength: 2,
-                data: []
-            }]
-    };
+        datasets: [{
+            label: "entry",
+            backgroundColor: "rgba(157, 213, 203, 1)",
+            borderColor: "rgba(157, 213, 203, 1)",
+            data: []
+        }]
+    }
 
     getOrganisationalCulture(24);
-
-    var ConfidenceRadarChart = new Chart(ConfidenceChartVar, {
-        type: 'radar',
-        data: ConfidenceDataSet,
-        options: options
-    });
 
     var MentalHealthRadarChart = new Chart(MentalHealthChartVar, {
         type: 'radar',
@@ -305,9 +288,13 @@ var CultureLineChart = new Chart(Culturectx, {
         type: 'bar',
         data: CultureDataSet,
         options: baroptions
-    })
+    });
 
-    getOrganisationalCulture(24);
+    var ConfidenceRadarChart = new Chart(ConfidenceChartVar, {
+        type: 'radar',
+        data: ConfidenceDataSet,
+        options: options
+    });
 
     var slider = document.getElementById('MentalHealthSlider');
 
@@ -317,7 +304,7 @@ var CultureLineChart = new Chart(Culturectx, {
 
     var slider2 = document.getElementById('ConfidenceSlider');
     slider2.oninput=function() {
-        getSelfConfidence(slider2.value-1);
+       getSelfConfidence(slider2.value-1);
     }
 
     var slider3 = document.getElementById('CultureSlider');
