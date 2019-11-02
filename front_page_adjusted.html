@@ -3,11 +3,11 @@
 <head>
 <link rel="stylesheet" href="values.css">
 <body>
-  <div class="card">
-<img src="autistica.jpg" alt="Autistica logo" style="float:right" width="250" max-width=100% height=auto>
-<div class="header" align ="right">
-  <h1>DAREreview</h1>
-</div>
+<img src="autistica_logo.png" alt="Autistica logo" style="float:left" width="400" height="150">
+<div class="header" align ="middle">
+
+  <h1>My DARE</h1>
+
 </div>
 
 <div class="row">
@@ -18,13 +18,16 @@
 
       <p>Based on your most recent submission, here are some links you may find helpful:</p>
       <a href="https://dareuk.org/">DARE website</a>
+      <p id="link1"></p>
+      <p id="link2"></p>
+      <p id="link3"></p>
         </div>
 
   </div>
   <div class="rightcolumn">
     <div class="card">
       <h2>Review your submissions here:</h2>
-      <button class="button button2" onclick="window.location.href = 'landingPage.html';">View Submissions</button>
+      <button class="button button2" onclick="window.location.href = 'landingPage.html'+ '#' + text;">View Submissions</button>
 
         </div>
 
@@ -38,22 +41,52 @@
         <span class="small_font">
         questionaires in total.
         </span>
+
+
     </div>
+
   </div>
 </div>
 
 <script>
+
+var text = window.location.hash.substring(1); //Username for the logged in User
+
  function test(){
     var d = new Date();
     var time = d.getHours();
     return time;
   }
   if(test()<=12){
-    document.getElementById("demo").innerHTML = "Good morning!";
+    document.getElementById("demo").innerHTML = "Good morning";
   } else if(test()>12&& test()<=18){
-      document.getElementById("demo").innerHTML = "Good afternoon!";
+      document.getElementById("demo").innerHTML = "Good afternoon";
   } else{
-      document.getElementById("demo").innerHTML = "Good night!";
+      document.getElementById("demo").innerHTML = "Good night";
+  }
+
+  function logic1(){
+    var d = 70;
+    return d;
+  }
+  if(logic1()<2){
+    document.getElementById("link1").innerHTML = "https://www.nhs.uk/conditions/autism/signs/";
+  }
+
+  function logic2(){
+    var d = 70;
+    return d;
+  }
+  if(logic1()<3){
+    document.getElementById("link2").innerHTML = "https://www.nhs.uk/conditions/autism/signs/";
+  }
+
+  function logic3(){
+    var d = 70;
+    return d;
+  }
+  if(logic1()<2){
+    document.getElementById("link3").innerHTML = "https://www.nhs.uk/conditions/autism/signs/";
   }
 
 
