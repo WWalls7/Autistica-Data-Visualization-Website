@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="values.css">
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-</head
+</head>
 <body>
 
 <div class="card">
@@ -24,7 +24,7 @@
     <div class='card'>
         <h3>Mental Health</h3>
         <canvas id = 'MentalHealthChart'></canvas>
-       <input type="range" min="1" max="25" value="25" class="slider" id="MentalHealthSlider">
+       <input type="range" min="1" max="25" value="25" class="slider" id="myRange">
         <canvas id = 'MentalHealthLineChart'></canvas>
     </div>
 </div>
@@ -33,7 +33,7 @@
   <div class='card'>
     <h3>Work Self Confidence</h3>
     <canvas id = 'ConfidenceChart'></canvas>
-    <input type="range" min="1" max="25" value="25" class="slider" id="ConfidenceSlider">
+    <input type="range" min="1" max="25" value="25" class="slider" id="myRange">
     <canvas id = 'ConfidenceLineChart'></canvas>
   </div>
 </div>
@@ -42,7 +42,7 @@
   <div class='card'>
     <h3>Organisational Culture</h3>
     <canvas id = 'CultureChart'></canvas>
-    <input type="range" min="1" max="25" value="25" class="slider" id="CultureSlider">
+    <input type="range" min="1" max="25" value="25" class="slider" id="myRange">
     <canvas id = 'CultureLineChart'></canvas>
   </div>
 </div>
@@ -50,9 +50,9 @@
 </div>
 
 <div class='column2'>
-  <div class='card'>
+    <div class='card' style="margin-left: 10px;">
     <h3>Adjustment</h3>
-    <p id="adjustment">fs</p>
+    <p id="adjustment" style="font-size:18px"></p>
   </div>
 </div>
 
@@ -97,27 +97,25 @@ function getMentalHealthData(x){
         }
 
 
-   }).then(function(data) {
+   }).then(function(data){
+       console.log(data[x])
        MentalHealthDataSet.datasets[0].data = [data[x].depression, data[x].anxiety, data[x].stress];
-
        MentalHealthRadarChart.update();
       // do something
    });
 }
 
-function getOrganisationalCulture(x){
+function getOrganisationalCulture(){
 
-    d3.csv("Organisational-culture-Table1.csv", function(d){
+    d3.csv(("Organisational-culture-Table1.csv").url(), function(d){
 
     return{
-        date : d.Date,
+        data : d.Date,
         average : +d.Average
     };
 
     }).then(function(data){
         // do something here
-        CultureDataSet.datasets[0].data = [data[x].average];
-        CultureBarChart.update();
     });
 }
 
@@ -143,7 +141,12 @@ function getOrganisationalCulture(x){
       });
 
   }
-
+var questionLists =["Over the last week, or since you last completed this question, please provide reflections about any misunderstandings you have experienced in the workplace, why you think they occurred, and how you think they were (or could be) successfully resolved? (please remember not to use real names of people you work with)",
+"Over the last week, or since you last completed this question, please provide reflections about any successes you have experienced in the workplace? (please remember not to use real names of people you work with)",
+"Please describe any adjustments (i.e. physcial changes to your workspace, management changes to the processes for completing tasks, or logistical changes to working hours or transport to work)",
+"If you have encountered any stories about autism in the media, could you describe them and its impact on you?",
+"Any other reflections that you would like to share? (please remember not to use real names of people you work with)"
+];
   function getAdjustment(){
       d3.csv("Autistica-8211-Adjustments.csv", function(d){
 
@@ -158,15 +161,18 @@ function getOrganisationalCulture(x){
 
       }).then(function(data){
           // do something here
+      document.getElementById("adjustment").innerHTML = questionLists[0] + "<br><br>" + data[0].q1 + "<br><br><br><br>" + questionLists[1] + "<br><br>" + data[0].q2 + "<br><br><br><br>" + questionLists[2] + "<br><br>" + data[0].q4 + "<br><br><br><br>" + questionLists[3] + "<br><br>" + data[0].q4 + "<br><br><br><br>" +
+              questionLists[4] + "<br><br>" + data[0].q5;
 
-        document.getElementById("adjustment").innerHTML = "dsadsdsa";
-
+                
+              
+              
       });
-
+      
 
   }
-    document.getElementById("adjustment").innerHTML = "dsadsdsa";
 
+getAdjustment();
 
 var MentalHealthChartVar = document.getElementById('MentalHealthChart');
 var ConfidenceChartVar = document.getElementById('ConfidenceChart');
@@ -230,16 +236,6 @@ var CultureLineChart = new Chart(Culturectx, {
         }
     };
 
-    baroptions = {
-        scales: {
-            xAxes: [{
-                gridLines: {
-                    offsetGridLines: true
-                }
-            }]
-        }
-    };
-
     var MentalHealthDataSet = {
         labels: ["Depression", "Anxiety", "Stress"],
         datasets: [{
@@ -264,17 +260,45 @@ var CultureLineChart = new Chart(Culturectx, {
 
     getSelfConfidence(24);
 
-    var CultureDataSet = {
-            datasets: [{
-                barPercentage: 0.5,
-                barThickness: 6,
-                maxBarThickness: 8,
-                minBarLength: 2,
-                data: []
-            }]
-    };
+    var MentalHealthRadarChart = new Chart(MentalHealthChartVar, {
+        type: 'radar',
+        data: MentalHealthDataSet,
+        options: options
+    });
 
-    getOrganisationalCulture(24);
+    var CultureRadarChart = new Chart(CultureChartVar, {
+        type: 'bar',
+          data: {
+            labels: ["Average"],
+            datasets: [{
+              label: 'Average',
+              data: [9],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)'
+              ],
+              borderColor: [
+                'rgba(255,99,132,1)',
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: false,
+            scales: {
+              xAxes: [{
+                ticks: {
+                  maxRotation: 90,
+                  minRotation: 80
+                }
+              }],
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
 
     var ConfidenceRadarChart = new Chart(ConfidenceChartVar, {
         type: 'radar',
@@ -282,34 +306,13 @@ var CultureLineChart = new Chart(Culturectx, {
         options: options
     });
 
-    var MentalHealthRadarChart = new Chart(MentalHealthChartVar, {
-        type: 'radar',
-        data: MentalHealthDataSet,
-        options: options
-    });
-
-    var CultureBarChart = new Chart(CultureChartVar, {
-        type: 'bar',
-        data: CultureDataSet,
-        options: baroptions
-    })
-
-    getOrganisationalCulture(24);
-
-    var slider = document.getElementById('MentalHealthSlider');
+    var slider = document.getElementById('myRange');
 
     slider.oninput=function() {
         getMentalHealthData(slider.value-1);
-    }
-
-    var slider2 = document.getElementById('ConfidenceSlider');
-    slider2.oninput=function() {
-        getSelfConfidence(slider2.value-1);
-    }
-
-    var slider3 = document.getElementById('CultureSlider');
-    slider3.oninput=function() {
-        getOrganisationalCulture(slider3.value-1);
+        getSelfConfidence(slider.value-1);
+        CultureDataSet.datasets[0].data = [10, 2, 9, 1, 8, 4, 7];
+        CultureRadarChart.update();
     }
 </script>
 
