@@ -127,22 +127,23 @@
 <div id="MentalHealth" class="tabcontent">
     <h3>Mental Health</h3>
     <canvas id = 'MentalHealthChart'></canvas>
+    <canvas id = 'MentalHealthLine'></canvas>
 </div>
 
 <div id="Confidence" class="tabcontent">
     <h3>Work Self Confidence</h3>
     <canvas id = 'ConfidenceChart'></canvas>
+    <canvas id = 'ConfidenceLine'></canvas>
 </div>
 
 <div id="Culture" class="tabcontent">
     <h3>Organisational Culture</h3>
     <canvas id = 'CultureChart'></canvas>
+    <canvas id = 'CultureLine'></canvas>
 </div>
 
 <input type="range" min="1" max="25" value="25" class="slider" id="myRange">
 <p>Value: <span id='demo'></span></p>
-
-<div class = 'button' >Change</div>
 
 </div>
 
@@ -175,22 +176,22 @@
 
 <script>
 
-
-
-const button = document.querySelector('.button');
-
-button.addEventListener('click', event => {
-    MentalHealthDataSet.datasets[0].data = [1, 10, 2];
-    ConfidenceDataSet.datasets[0].data = [10];
-    CultureDataSet.datasets[0].data = [10, 2, 9, 1, 8, 4, 7];
-    MentalHealthRadarChart.update();
-    ConfidenceRadarChart.update();
-    CultureRadarChart.update();
-})
-
 var MentalHealthChartVar = document.getElementById('MentalHealthChart');
 var ConfidenceChartVar = document.getElementById('ConfidenceChart');
 var CultureChartVar = document.getElementById('CultureChart');
+var MentalHealthLine = document.getElementById('MentalHealthAverage').getContext('2d');
+var ConfidenceLine = document.getElementById('ConfidenceAverage').getContext('2d');
+var CultureLine = document.getElementById('CultureAverage').getContext('2d');
+
+var MentalHealthLineChart = new Chart(MentalHealthLine, {
+    type: 'line',
+    data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        datasets: [{
+            label: 'Average Mental Health Score', 
+        }]
+    }
+})
 
     options = {
         scale: {
