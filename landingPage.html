@@ -75,6 +75,38 @@
                 width: 100%;
             }
         }
+
+        .slider {
+          -webkit-appearance: none;
+          width: 100%;
+          height: 25px;
+          background: #d3d3d3;
+          outline: none;
+          opacity: 0.7;
+          -webkit-transition: .2s;
+          transition: opacity .2s;
+        }
+
+        .slider:hover {
+          opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 25px;
+          height: 25px;
+          background: #4CAF50;
+          cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+          width: 25px;
+          height: 25px;
+          background: #4CAF50;
+          cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -105,6 +137,9 @@
     <h3>Organisational Culture</h3>
     <canvas id = 'CultureChart'></canvas>
 </div>
+
+<input type="range" min="1" max="25" value="25" class="slider" id="myRange">
+<p>Value: <span id='demo'></span></p>
 
 <div class = 'button' >Change</div>
 
@@ -138,6 +173,8 @@
 </script>
 
 <script>
+
+
 
 const button = document.querySelector('.button');
 
@@ -182,7 +219,7 @@ var CultureChartVar = document.getElementById('CultureChart');
             label: "entry",
             backgroundColor: "rgba(233, 185, 165, 0.1)",
             borderColor: "rgba(233, 185, 165, 1)",
-            data: [5]
+            data: [5, 4, 6]
         }]
     };
 
@@ -213,6 +250,14 @@ var CultureChartVar = document.getElementById('CultureChart');
         data: CultureDataSet,
         options: options
     });
+
+    var slider = document.getElementById('myRange');
+    var output = document.getElementById('demo');
+    output.innerHTML = slider.value;
+
+    slider.oninput=function() {
+        output.innerHTML = this.value;
+    }
 </script>
 
 </body>
