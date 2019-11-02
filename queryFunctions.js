@@ -61,6 +61,7 @@ import "https://d3js.org/d3.v5.min.js"
         d3.csv("Autistica-8211-Adjustments.csv", function(d){
 
 				return{
+					date : d.Date,
 					q1 : d.Q1,
 					q2 : d.Q2,
 					q3 : d.Q3,
