@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<script>var text = window.location.hash.substring(1); //Username for the logged in User</script>
+<script>
+    var text = window.location.hash.substring(1); //Username for the logged in User
+    document.getElementById("adjustment").innerHTML = text;
+    </script>
 
 <div class="card" style="height:70">
     <img src="autistica.jpg" alt="Autistica logo" margin-left=90% width="250" height='70'>
@@ -61,6 +64,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
+    
+    
     function openGraph(evt, graphName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -84,11 +89,11 @@ var userMentalH;
 var userOrganisationalCulture;
 var userSelfConfidence;
 var userAdjustment;
-
+var text = window.location.hash.substring(1);
+console.log(text);
 function getMentalHealthData(x){
-
   d3.csv("Mental-health-Table1.csv", function(d){
-        if("22222222" == d.Username){
+        if(text == d.Username){
             return{
                 date : d.Date,
                 depression : +d.Depression,
@@ -102,6 +107,7 @@ function getMentalHealthData(x){
    }).then(function(data){
        MentalHealthDataSet.datasets[0].data = [data[x].depression, data[x].anxiety, data[x].stress];
        MentalHealthRadarChart.update();
+           console.log(data);
       // do something
    });
 }
@@ -150,9 +156,9 @@ var questionLists =["Over the last week, or since you last completed this questi
 "If you have encountered any stories about autism in the media, could you describe them and its impact on you?",
 "Any other reflections that you would like to share? (please remember not to use real names of people you work with)"
 ];
+
   function getAdjustment(){
       d3.csv("Autistica-8211-Adjustments.csv", function(d){
-
       return{
           data : d.Date,
           q1 : d.Q1,
@@ -164,8 +170,8 @@ var questionLists =["Over the last week, or since you last completed this questi
 
       }).then(function(data){
           // do something here
-      document.getElementById("adjustment").innerHTML = questionLists[0] + "<br><br>" + data[0].q1 + "<br><br><br><br>" + questionLists[1] + "<br><br>" + data[0].q2 + "<br><br><br><br>" + questionLists[2] + "<br><br>" + data[0].q4 + "<br><br><br><br>" + questionLists[3] + "<br><br>" + data[0].q4 + "<br><br><br><br>" +
-              questionLists[4] + "<br><br>" + data[0].q5;
+<!--      document.getElementById("adjustment").innerHTML = questionLists[0] + "<br><br>" + data[0].q1 + "<br><br><br><br>" + questionLists[1] + "<br><br>" + data[0].q2 + "<br><br><br><br>" + questionLists[2] + "<br><br>" + data[0].q4 + "<br><br><br><br>" + questionLists[3] + "<br><br>" + data[0].q4 + "<br><br><br><br>" +-->
+<!--              questionLists[4] + "<br><br>" + data[0].q5;-->
 
 
 
