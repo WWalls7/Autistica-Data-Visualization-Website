@@ -1,10 +1,19 @@
 
-body { background-color: #9DD5CA; }
+body { background-color: rgb(1, 97, 113); }
 
 div#login { background-color: #EBEBED;
   padding: 2em;
   margin-top: 2em;
   border-radius: 5px;
+}
+#logo {
+    display: block;
+    width: auto;
+    height: auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin: 10px;
+	max-width:350px
 }
 button{
    background-color: #016171;
@@ -15,4 +24,14 @@ button{
 }
 button:hover {
   box-shadow: 0 1px 13px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+#container{
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #ffffff;
+    border-radius: 4px 4px 4px 4px;
+	width: 87%;
+	margin-left:auto;
+	margin-right:auto;
 }
