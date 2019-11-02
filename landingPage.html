@@ -3,13 +3,16 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body {font-family: Arial;}
+        body {
+            font-family: Arial;
+            background-color: rgba(235, 235, 237, 1);
+        }
 
         /* Style the tab */
         .tab {
             overflow: hidden;
             border: 1px solid #ccc;
-            background-color: #f1f1f1;
+            background-color: rgba(235, 235, 237, 1);
         }
 
         /* Style the buttons inside the tab */
@@ -102,6 +105,9 @@
     <h3>Organisational Culture</h3>
     <canvas id = 'CultureChart'></canvas>
 </div>
+
+<div class = 'button' >Change</div>
+
 </div>
 
 <div class='column2'>
@@ -132,6 +138,18 @@
 </script>
 
 <script>
+
+const button = document.querySelector('.button');
+
+button.addEventListener('click', event => {
+    MentalHealthDataSet.datasets[0].data = [1, 10, 2];
+    ConfidenceDataSet.datasets[0].data = [10];
+    CultureDataSet.datasets[0].data = [10, 2, 9, 1, 8, 4, 7];
+    MentalHealthRadarChart.update();
+    ConfidenceRadarChart.update();
+    CultureRadarChart.update();
+})
+
 var MentalHealthChartVar = document.getElementById('MentalHealthChart');
 var ConfidenceChartVar = document.getElementById('ConfidenceChart');
 var CultureChartVar = document.getElementById('CultureChart');
@@ -149,7 +167,7 @@ var CultureChartVar = document.getElementById('CultureChart');
     };
 
     var MentalHealthDataSet = {
-        labels: ["Mental Health", "Work Self Confidence", "Organisational Culture"],
+        labels: ["Depression", "Anxiety", "Stress"],
         datasets: [{
             label: "entry",
             backgroundColor: "rgba(178, 76, 90, 0.1)",
@@ -164,35 +182,35 @@ var CultureChartVar = document.getElementById('CultureChart');
             label: "entry",
             backgroundColor: "rgba(233, 185, 165, 0.1)",
             borderColor: "rgba(233, 185, 165, 1)",
-            data: [5, 4, 6]
+            data: [5]
         }]
     };
 
-    var OrganisationalDataSet = {
-        labels: ["Mental Health", "Work Self Confidence", "Organisational Culture"],
+    var CultureDataSet = {
+        labels: ["Learning", "Problem Solving", "Pressure", "Role Expectations", "Teamwork", "Sensitivity", "Work Politics"],
         datasets: [{
             label: "entry",
-            backgroundColor: "rgba(178, 76, 90, 0.1)",
-            borderColor: "rgba(178, 76, 90, 1)",
-            data: [5, 4, 6]
+            backgroundColor: "rgba(157, 213, 203, 0.1)",
+            borderColor: "rgba(157, 213, 203, 1)",
+            data: [5, 4, 6, 7, 2, 1, 3.5]
         }]
     };
 
-    var MentalHealthRadarChart = new Chart(MentalHealthDataSet, {
+    var MentalHealthRadarChart = new Chart(MentalHealthChartVar, {
         type: 'radar',
         data: MentalHealthDataSet,
         options: options
     });
 
-    var ConfidenceRadarChart = new Chart(ctx, {
+    var ConfidenceRadarChart = new Chart(ConfidenceChartVar, {
         type: 'radar',
-        data: MentalHealthDataSet,
+        data: ConfidenceDataSet,
         options: options
     });
 
-    var CultureRadarChart = new Chart(ctx, {
+    var CultureRadarChart = new Chart(CultureChartVar, {
         type: 'radar',
-        data: MentalHealthDataSet,
+        data: CultureDataSet,
         options: options
     });
 </script>
