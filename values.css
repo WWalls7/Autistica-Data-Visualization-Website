@@ -1,0 +1,18 @@
+
+body { background-color: #9DD5CA; }
+
+div#login { background-color: #EBEBED;
+  padding: 2em;
+  margin-top: 2em;
+  border-radius: 5px;
+}
+button{
+   background-color: #016171;
+   font-size: 1.5em;
+   border-radius: 5px;
+   border: 1px solid black;
+   box-shadow: 0 3px 10px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+button:hover {
+  box-shadow: 0 1px 13px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
