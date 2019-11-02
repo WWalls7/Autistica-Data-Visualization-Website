@@ -256,7 +256,12 @@ var CultureChartVar = document.getElementById('CultureChart');
     output.innerHTML = slider.value;
 
     slider.oninput=function() {
-        output.innerHTML = this.value;
+        MentalHealthDataSet.datasets[0].data = [1, 10, 2];
+        ConfidenceDataSet.datasets[0].data = [10];
+        CultureDataSet.datasets[0].data = [10, 2, 9, 1, 8, 4, 7];
+        MentalHealthRadarChart.update();
+        ConfidenceRadarChart.update();
+        CultureRadarChart.update();
     }
 </script>
 
