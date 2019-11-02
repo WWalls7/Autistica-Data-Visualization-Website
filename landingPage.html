@@ -124,19 +124,19 @@
 <div id="MentalHealth" class="tabcontent">
     <h3>Mental Health</h3>
     <canvas id = 'MentalHealthChart'></canvas>
-    <canvas id = 'MentalHealthLine'></canvas>
+    <canvas id = 'MentalHealthLineChart'></canvas>
 </div>
 
 <div id="Confidence" class="tabcontent">
     <h3>Work Self Confidence</h3>
     <canvas id = 'ConfidenceChart'></canvas>
-    <canvas id = 'ConfidenceLine'></canvas>
+    <canvas id = 'ConfidenceLineChart'></canvas>
 </div>
 
 <div id="Culture" class="tabcontent">
     <h3>Organisational Culture</h3>
     <canvas id = 'CultureChart'></canvas>
-    <canvas id = 'CultureLine'></canvas>
+    <canvas id = 'CultureLineChart'></canvas>
 </div>
 
 <input type="range" min="1" max="25" value="25" class="slider" id="myRange">
@@ -175,19 +175,65 @@
 var MentalHealthChartVar = document.getElementById('MentalHealthChart');
 var ConfidenceChartVar = document.getElementById('ConfidenceChart');
 var CultureChartVar = document.getElementById('CultureChart');
-var MentalHealthLine = document.getElementById('MentalHealthAverage').getContext('2d');
-var ConfidenceLine = document.getElementById('ConfidenceAverage').getContext('2d');
-var CultureLine = document.getElementById('CultureAverage').getContext('2d');
 
-var MentalHealthLineChart = new Chart(MentalHealthLine, {
+var MentalHealthctx = document.getElementById("MentalHealthLineChart").getContext('2d');
+var Confidencectx = document.getElementById("ConfidenceLineChart").getContext('2d');
+var Culturectx = document.getElementById("CultureLineChart").getContext('2d');
+
+
+var MentalHealthLineChart = new Chart(MentalHealthctx, {
     type: 'line',
     data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        labels: ["January",	"February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         datasets: [{
-            label: 'Average Mental Health Score', 
-        }]
+            label: 'Series 1', // Name the series
+            data: [3, 4, 2,	5, 9, 1, 2, 6, 2.5, 3, 7, 6], // Specify the data values array
+            fill: false,
+            borderColor: '#2196f3', // Add custom color border (Line)
+            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            borderWidth: 1 // Specify bar border width
+        }]},
+    options: {
+      responsive: true, // Instruct chart js to respond nicely.
+      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
     }
-})
+});
+
+var ConfidenceLineChart = new Chart(Confidencectx, {
+    type: 'line',
+    data: {
+        labels: ["January",	"February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        datasets: [{
+            label: 'Series 1', // Name the series
+            data: [3, 4, 2,	5, 9, 1, 2, 6, 2.5, 3, 7, 6], // Specify the data values array
+            fill: false,
+            borderColor: '#2196f3', // Add custom color border (Line)
+            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            borderWidth: 1 // Specify bar border width
+        }]},
+    options: {
+      responsive: true, // Instruct chart js to respond nicely.
+      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
+    }
+});
+
+var CultureLineChart = new Chart(Culturectx, {
+    type: 'line',
+    data: {
+        labels: ["January",	"February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        datasets: [{
+            label: 'Series 1', // Name the series
+            data: [3, 4, 2,	5, 9, 1, 2, 6, 2.5, 3, 7, 6], // Specify the data values array
+            fill: false,
+            borderColor: '#2196f3', // Add custom color border (Line)
+            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            borderWidth: 1 // Specify bar border width
+        }]},
+    options: {
+      responsive: true, // Instruct chart js to respond nicely.
+      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
+    }
+});
 
     options = {
         scale: {
@@ -207,17 +253,7 @@ var MentalHealthLineChart = new Chart(MentalHealthLine, {
             label: "entry",
             backgroundColor: "rgba(178, 76, 90, 0.1)",
             borderColor: "rgba(178, 76, 90, 1)",
-            data: [5, 4, 6]
-        }]
-    };
-
-    var ConfidenceDataSet = {
-        labels: ["Mental Health", "Work Self Confidence", "Organisational Culture"],
-        datasets: [{
-            label: "entry",
-            backgroundColor: "rgba(233, 185, 165, 0.1)",
-            borderColor: "rgba(233, 185, 165, 1)",
-            data: [5, 4, 6]
+            data: []
         }]
     };
 
@@ -238,10 +274,38 @@ var MentalHealthLineChart = new Chart(MentalHealthLine, {
     });
 
     var ConfidenceRadarChart = new Chart(ConfidenceChartVar, {
-        type: 'radar',
-        data: ConfidenceDataSet,
-        options: options
-    });
+        type: 'bar',
+          data: {
+            labels: ["Average"],
+            datasets: [{
+              label: 'Average',
+              data: [9],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)'
+              ],
+              borderColor: [
+                'rgba(255,99,132,1)',
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: false,
+            scales: {
+              xAxes: [{
+                ticks: {
+                  maxRotation: 90,
+                  minRotation: 80
+                }
+              }],
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
 
     var CultureRadarChart = new Chart(CultureChartVar, {
         type: 'radar',
