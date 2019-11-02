@@ -105,6 +105,9 @@
     <h3>Organisational Culture</h3>
     <canvas id = 'CultureChart'></canvas>
 </div>
+
+<div class = 'button' >Change</div>
+
 </div>
 
 <div class='column2'>
@@ -135,6 +138,18 @@
 </script>
 
 <script>
+
+const button = document.querySelector('.button');
+
+button.addEventListener('click', event => {
+    MentalHealthDataSet.datasets[0].data = [1, 10, 2];
+    ConfidenceDataSet.datasets[0].data = [10];
+    CultureDataSet.datasets[0].data = [10, 2, 9, 1, 8, 4, 7];
+    MentalHealthRadarChart.update();
+    ConfidenceRadarChart.update();
+    CultureRadarChart.update();
+})
+
 var MentalHealthChartVar = document.getElementById('MentalHealthChart');
 var ConfidenceChartVar = document.getElementById('ConfidenceChart');
 var CultureChartVar = document.getElementById('CultureChart');
@@ -167,7 +182,7 @@ var CultureChartVar = document.getElementById('CultureChart');
             label: "entry",
             backgroundColor: "rgba(233, 185, 165, 0.1)",
             borderColor: "rgba(233, 185, 165, 1)",
-            data: [5, 4, 6]
+            data: [5]
         }]
     };
 
