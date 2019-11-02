@@ -180,13 +180,16 @@ button:hover {
 
 .button3 {
 	background-color: rgb(178,76,90);
+		position :relative;
+		bottom:18px;
   	color: white;
-  	padding: 6px 10px;
-  	text-align: center;
+  	padding: 8px 15px;
+
+		float:right;
   	text-decoration: none;
   	display: inline-block;
   	border: none;
-  	font-size: 16px;
+  	font-size: 80px;
 }
 
 .large_font{
