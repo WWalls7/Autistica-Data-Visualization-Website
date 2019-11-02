@@ -23,7 +23,7 @@
     <button class="tablinks" onclick="openGraph(event, 'Confidence')">Work Self Confidence</button>
     <button class="tablinks" onclick="openGraph(event, 'Culture')">Organisational Culture</button>
 </div>
-<h2>November 1, 2019</h2>
+<h2 id="date">January 1, 2019</h2>
 
 <div id="MentalHealth" class="tabcontent" style="display: block">
     <div class='card'>
@@ -107,6 +107,8 @@ function getMentalHealthData(x){
    }).then(function(data){
        MentalHealthDataSet.datasets[0].data = [data[x].depression, data[x].anxiety, data[x].stress];
        MentalHealthRadarChart.update();
+           document.getElementById("date").innerHTML = data[x].date;
+
       // do something
    });
 }
@@ -125,6 +127,8 @@ function getOrganisationalCulture(x){
     }).then(function(data){
         CultureDataSet.datasets[0].data = [data[x].average];
         CultureBarChart.update();
+            document.getElementById("date").innerHTML = data[x].date;
+
         // do something here
     });
 }
@@ -149,18 +153,20 @@ function getOrganisationalCulture(x){
       }).then(function(data){
           ConfidenceDataSet.datasets[0].data = [data[x].learning, data[x].problemSolving, data[x].pressure, data[x].roleExpectation, data[x].teamwork, data[x].sensitivity, data[x].workPolitics];
           ConfidenceRadarChart.update();
+              document.getElementById("date").innerHTML = data[x].date;
+
       // do something here
       });
 
   }
-var questionLists =["Over the last week, or since you last completed this question, please provide reflections about any misunderstandings you have experienced in the workplace, why you think they occurred, and how you think they were (or could be) successfully resolved? (please remember not to use real names of people you work with)",
-"Over the last week, or since you last completed this question, please provide reflections about any successes you have experienced in the workplace? (please remember not to use real names of people you work with)",
-"Please describe any adjustments (i.e. physcial changes to your workspace, management changes to the processes for completing tasks, or logistical changes to working hours or transport to work)",
-"If you have encountered any stories about autism in the media, could you describe them and its impact on you?",
-"Any other reflections that you would like to share? (please remember not to use real names of people you work with)"
+var questionLists =["1.Over the last week, or since you last completed this question, please provide reflections about any misunderstandings you have experienced in the workplace, why you think they occurred, and how you think they were (or could be) successfully resolved? (please remember not to use real names of people you work with)",
+"2.Over the last week, or since you last completed this question, please provide reflections about any successes you have experienced in the workplace? (please remember not to use real names of people you work with)",
+"3.Please describe any adjustments (i.e. physcial changes to your workspace, management changes to the processes for completing tasks, or logistical changes to working hours or transport to work)",
+"4.If you have encountered any stories about autism in the media, could you describe them and its impact on you?",
+"5.Any other reflections that you would like to share? (please remember not to use real names of people you work with)"
 ];
 
-  function getAdjustment(){
+  function getAdjustment(x){
       d3.csv("Autistica-8211-Adjustments.csv", function(d){
              
          if(text == d.Username){
@@ -178,8 +184,8 @@ var questionLists =["Over the last week, or since you last completed this questi
 
       }).then(function(data){
           // do something here
-      document.getElementById("adjustment").innerHTML = questionLists[0] + "<br><br>" + data[0].q1 + "<br><br><br><br>" + questionLists[1] + "<br><br>" + data[0].q2 + "<br><br><br><br>" + questionLists[2] + "<br><br>" + data[0].q4 + "<br><br><br><br>" + questionLists[3] + "<br><br>" + data[0].q4 + "<br><br><br><br>" +
-              questionLists[4] + "<br><br>" + data[0].q5;
+      document.getElementById("adjustment").innerHTML = questionLists[0] + "<br><br>" + data[x].q1 + "<br><br><br><br>" + questionLists[1] + "<br><br>" + data[x].q2 + "<br><br><br><br>" + questionLists[2] + "<br><br>" + data[x].q4 + "<br><br><br><br>" + questionLists[3] + "<br><br>" + data[x].q4 + "<br><br><br><br>" +
+              questionLists[4] + "<br><br>" + data[x].q5;
 
 
 
@@ -292,6 +298,8 @@ var CultureLineChart = new Chart(Culturectx, {
     }
 
     getOrganisationalCulture(24);
+    
+    getAdjustment(24);
 
     var MentalHealthRadarChart = new Chart(MentalHealthChartVar, {
         type: 'radar',
@@ -315,16 +323,21 @@ var CultureLineChart = new Chart(Culturectx, {
 
     slider.oninput=function() {
         getMentalHealthData(slider.value-1);
+        getAdjustment(slider.value-1);
+
     }
 
     var slider2 = document.getElementById('ConfidenceSlider');
     slider2.oninput=function() {
        getSelfConfidence(slider2.value-1);
+       getAdjustment(slider2.value-1);
+
     }
 
     var slider3 = document.getElementById('CultureSlider');
     slider3.oninput=function() {
         getOrganisationalCulture(slider3.value-1);
+        getAdjustment(slider3.value-1);
     }
 </script>
 
