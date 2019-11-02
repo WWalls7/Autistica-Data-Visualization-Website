@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
 <link rel="stylesheet" href="values.css">
 <body>
 <div class="header1" >
@@ -55,42 +57,87 @@ console.log(text);
     var time = d.getHours();
     return time;
   }
-  if(test()<=12){
-    document.getElementById("demo").innerHTML = "Good morning!";
-  } else if(test()>12&& test()<=18){
-      document.getElementById("demo").innerHTML = "Good afternoon!";
-  } else{
-      document.getElementById("demo").innerHTML = "Good night!";
-  }
+<!--  if(test()<=12){-->
+<!--    document.getElementById("demo").innerHTML = "Good morning!";-->
+<!--  } else if(test()>12&& test()<=18){-->
+<!--      document.getElementById("demo").innerHTML = "Good afternoon!";-->
+<!--  } else{-->
+<!--      document.getElementById("demo").innerHTML = "Good night!";-->
+<!--  }-->
 
-  function logic1(){
-    var d = 70;
-    return d;
-  }
-  if(logic1()<2){
-    document.getElementById("link1").innerHTML = "https://www.giveusashout.org/get-help/?gclid=EAIaIQobChMI_c6zlJ_L5QIVyrHtCh3tbghNEAAYAiAAEgJDfPD_BwE";
-  }
 
-  function logic2(){
-    var d = 70;
-    return d;
-  }
-  if(logic2()<3){
-    document.getElementById("link2").innerHTML = "https://www.top10tips.uk/confidence";
-  }
+function getMentalHealthData(){
+  d3.csv("Mental-health-Table1.csv", function(d){
+        if(text == d.Username){
+            return{
+                date : d.Date,
+                depression : +d.Depression,
+            };
 
-  function logic3(){
-    var d = 70;
-    return d;
-  }
-  if(logic3()<2){
-    document.getElementById("link3").innerHTML = "https://www.top10tips.uk/officeCulture";
-  }
+        }
 
-  if(logic1>1 && logic2 >2 && logic3 > 1){
+   }).then(function(data){
+           if(data[data.length - 1].depression > 20){
+                document.getElementById("link1").innerHTML = "https://www.giveusashout.org/get-help/?gclid=EAIaIQobChMI_c6zlJ_L5QIVyrHtCh3tbghNEAAYAiAAEgJDfPD_BwE";
+           }
+
+      // do something
+   });
+}
+getMentalHealthData();
+
+// logic 1 depression
+
+function getSelfConfidence(){
+    d3.csv("How_rate_your_confidence-Table1.csv", function(d){
+       if(text == d.Username){
+           return{
+               teamwork : +d.Teamwork,
+           };
+       }
+
+
+    }).then(function(data){
+            if(data[data.length - 1]<2.5){
+          document.getElementById("link2").innerHTML = "https://www.top10tips.uk/confidence";
+        }
+
+    // do something here
+    });
+
+}
+
+getSelfConfidence();
+
+function getOrganisationalCulture(){
+
+    d3.csv("Organisational-culture-Table1.csv", function(d){
+           if(text == d.Username){
+            return{
+                average : +d.Average
+            };
+           }
+
+
+    }).then(function(data){
+            if(data[data.length - 1]<2){
+          document.getElementById("link3").innerHTML = "https://www.top10tips.uk/officeCulture";
+        }
+
+        // do something here
+    });
+}
+getOrganisationalCulture();
+
+// logic 2 confidence
+
+// logic 3 culture
+
+  if(true){
     document.getElementById("default").innerHTML = "https://dareuk.org/"
   }
 </script>
 
 </body>
 </html>
+
