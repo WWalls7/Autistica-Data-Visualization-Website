@@ -16,10 +16,13 @@
     <button class="tablinks" onclick="openGraph(event, 'Culture')">Organisational Culture</button>
 </div>
 
-<div id="MentalHealth" class="tabcontent">
-    <h3>Mental Health</h3>
-    <canvas id = 'MentalHealthChart'></canvas>
-    <canvas id = 'MentalHealthLineChart'></canvas>
+<div id="MentalHealth" class="tabcontent" style="display: block">
+    <div class='card'>
+        <h3>Mental Health</h3>
+        <canvas id = 'MentalHealthChart'></canvas>
+        <input type="range" min="1" max="25" value="25" class="slider" id="myRange">
+        <canvas id = 'MentalHealthLineChart'></canvas>
+    </div>
 </div>
 
 <div id="Confidence" class="tabcontent">
