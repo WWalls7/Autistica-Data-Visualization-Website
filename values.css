@@ -72,8 +72,6 @@ button:hover {
             height: 100%;
         }
 
-
-
         .slider {
           -webkit-appearance: none;
           width: 100%;
@@ -211,7 +209,7 @@ button:hover {
   }
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width:750px) {
             .column1 {
                 width: 100%;
             }

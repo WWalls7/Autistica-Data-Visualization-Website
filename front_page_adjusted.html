@@ -15,6 +15,9 @@
     <div class="card">
       <h2>Notices</h2>
       <p id="demo"></p>
+      <p id = "link1"></p>
+      <p id = "link2"></p>
+      <p id = "link3"></p>
 
       <p>Based on your most recent submission, here are some links you may find helpful:</p>
       <a href="https://dareuk.org/">DARE website</a>
@@ -43,6 +46,7 @@
 </div>
 
 <script>
+var text = window.location.hash.substring(1); //Username for the logged in User
  function test(){
     var d = new Date();
     var time = d.getHours();
@@ -55,8 +59,27 @@
   } else{
       document.getElementById("demo").innerHTML = "Good night!";
   }
-
-
+  function logic1(){
+    var d = 70;
+    return d;
+  }
+  if(logic1()<2){
+    document.getElementById("link1").innerHTML = "https://www.nhs.uk/conditions/autism/signs/";
+  }
+  function logic2(){
+    var d = 70;
+    return d;
+  }
+  if(logic1()<3){
+    document.getElementById("link2").innerHTML = "https://www.nhs.uk/conditions/autism/signs/";
+  }
+  function logic3(){
+    var d = 70;
+    return d;
+  }
+  if(logic1()<2){
+    document.getElementById("link3").innerHTML = "https://www.nhs.uk/conditions/autism/signs/";
+  }
 </script>
 
 </body>
