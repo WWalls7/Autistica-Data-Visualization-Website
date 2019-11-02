@@ -38,7 +38,6 @@
 </div>
 
 <input type="range" min="1" max="25" value="25" class="slider" id="myRange">
-<p>Value: <span id='demo'></span></p>
 
 </div>
 
@@ -110,7 +109,7 @@ function getOrganisationalCulture(){
     });
 }
 
-  function getSelfConfidence(){
+  function getSelfConfidence(x){
       d3.csv("How_rate_your_confidence-Table1.csv", function(d){
 
       return{
@@ -126,7 +125,8 @@ function getOrganisationalCulture(){
       };
 
       }).then(function(data){
-
+          ConfidenceDataSet.datasets[0].data = [data[x].learning, data[x].problemSolving, data[x].pressure, data[x].roleExpectation, data[x].teamwork, data[x].sensitivity, data[x].workPolitics];
+          ConfidenceRadarChart.update();
       // do something here
       });
 
@@ -234,15 +234,17 @@ var CultureLineChart = new Chart(Culturectx, {
 
     getMentalHealthData(24);
 
-    var CultureDataSet = {
+    var ConfidenceDataSet = {
         labels: ["Learning", "Problem Solving", "Pressure", "Role Expectations", "Teamwork", "Sensitivity", "Work Politics"],
         datasets: [{
             label: "entry",
             backgroundColor: "rgba(157, 213, 203, 0.1)",
             borderColor: "rgba(157, 213, 203, 1)",
-            data: [5, 4, 6, 7, 2, 1, 3.5]
+            data: []
         }]
     };
+
+    getSelfConfidence(24);
 
     var MentalHealthRadarChart = new Chart(MentalHealthChartVar, {
         type: 'radar',
@@ -250,7 +252,7 @@ var CultureLineChart = new Chart(Culturectx, {
         options: options
     });
 
-    var ConfidenceRadarChart = new Chart(ConfidenceChartVar, {
+    var CultureRadarChart = new Chart(CultureChartVar, {
         type: 'bar',
           data: {
             labels: ["Average"],
@@ -284,21 +286,18 @@ var CultureLineChart = new Chart(Culturectx, {
           }
         });
 
-    var CultureRadarChart = new Chart(CultureChartVar, {
+    var ConfidenceRadarChart = new Chart(ConfidenceChartVar, {
         type: 'radar',
-        data: CultureDataSet,
+        data: ConfidenceDataSet,
         options: options
     });
 
     var slider = document.getElementById('myRange');
-    var output = document.getElementById('demo');
-    output.innerHTML = slider.value;
 
     slider.oninput=function() {
         getMentalHealthData(slider.value-1);
-        ConfidenceDataSet.datasets[0].data = [10];
+        getSelfConfidence(slider.value-1);
         CultureDataSet.datasets[0].data = [10, 2, 9, 1, 8, 4, 7];
-        ConfidenceRadarChart.update();
         CultureRadarChart.update();
     }
 </script>
