@@ -1,25 +1,21 @@
 
 body { 
-	background-color: rgb(1, 97, 113); 
+	background-color: rgba(1, 97, 113, 1);
+    color: rgb(0,0,0);
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-#login { background-color: #EBEBED;
-  padding: 2em;
+content {
+	background-color: rgba(235, 235, 237, 1);
+}
+
+#login { background-color: rgb(1, 97, 113);
+  padding: 3em;
   margin-top: 2em;
   border-radius: 5px;
 }
-#logo {
-    display: block;
-    width: auto;
-    height: auto;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin: 10px;
-	max-width:350px
-}
 button{
-   background-color: #016171;
+   background-color: rgb(157, 213, 203);
    font-size: 1.5em;
    border-radius: 5px;
    border: 1px solid black;
@@ -32,7 +28,7 @@ button:hover {
         .tab {
             overflow: hidden;
             border: 1px solid #ccc;
-            background-color: #f1f1f1;
+            background-color: rgba(235, 235, 237, 1);;
         }
         /* Style the buttons inside the tab */
         .tab button {
@@ -58,58 +54,13 @@ button:hover {
         .tabcontent {
             display: none;
             padding: 6px 12px;
-            border: 1px solid #ccc;
+            /*border: 1px solid #ccc;*/
             border-top: none;
         }
         .header {
             background-color: #F1F1F1;
             text-align: center;
             padding: 20px;
-        }
-body {
-            background-color: rgba(235, 235, 237, 1);
-            color: rgb(0,0,0);
-        }
-
-        /* Style the tab */
-        .tab {
-            overflow: hidden;
-            border: 1px solid #ccc;
-            background-color: rgba(235, 235, 237, 1);
-        }
-
-        /* Style the buttons inside the tab */
-        .tab button {
-            background-color: inherit;
-            width: 33.3333333333333333333333333333333333333333333333333333333333333333333%;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-            font-size: 17px;
-        }
-
-        /* Change background color of buttons on hover */
-        .tab button:hover {
-            background-color: #ddd;
-        }
-
-        /* Create an active/current tablink class */
-        .tab button.active {
-            background-color: #ccc;
-        }
-
-        /* Style the tab content */
-        .tabcontent {
-            display: none;
-            padding: 6px 12px;
-            border-top: none;
-        }
-
-        .content {
-
         }
 
         .column1 {
@@ -159,14 +110,14 @@ body {
           appearance: none;
           width: 25px;
           height: 25px;
-          background: #4CAF50;
+          background: rgb(1, 97, 113);
           cursor: pointer;
         }
 
         .slider::-moz-range-thumb {
           width: 25px;
           height: 25px;
-          background: #4CAF50;
+          background: rgb(1, 97, 113);
           cursor: pointer;
         }
        
