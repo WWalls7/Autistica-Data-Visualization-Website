@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  padding: 10px;
+  background: #f1f1f1;
+}
+
+/* Header/Blog Title */
+.header {
+  padding: 30px;
+  text-align: center;
+  background: white;
+}
+
+
+.header h1 {
+  position:relative;
+  font-size: 50px;
+  margin-right: 300px;
+}
+
+/* Style the top navigation bar */
+
+
+/* Style the topnav links */
+
+
+/* Change color on hover */
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  float: left;
+  background-color: #EBEBED;
+  width: 50%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 50%;
+  background-color: #EBEBED;
+  padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+
+
+/* Footer */
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.button2 {background-color: #016171;}
+
+.large_font{
+	font-size: 25pt;
+  color: #016171;
+}
+
+.small_font{
+	font-size: 20pt;
+  }
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+<img src="autistica_logo.png" alt="Autistica logo" style="float:left" width="400" height="150">
+<div class="header" align ="middle">
+
+  <h1>My DARE</h1>
+
+
+</div>
+
+
+
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card">
+
+      <h2 id="demo"></h2>
+        <p>Here are some useful links to you</p>
+        <p id="link1"></p>
+        <p id="link2"></p>
+        <p id="link3"></p>
+
+
+
+        </div>
+
+  </div>
+  <div class="rightcolumn">
+    <div class="card">
+      <h2>View something</h2>
+      <button class="button button2" onclick="window.location.href = 'test.html';">View Something</button>
+
+        </div>
+
+    <div class="card">
+      <span class="small_font">
+      You have submitted
+      </span>
+      <span class="large_font">
+        25
+        </span>
+        <span class="small_font">
+        questionaires in total.
+        </span>
+
+
+
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+ function test(){
+    var d = new Date();
+    var time = d.getHours();
+    return time;
+  }
+  if(test()<=12){
+    document.getElementById("demo").innerHTML = "Good morning";
+  } else if(test()>12&& test()<=18){
+      document.getElementById("demo").innerHTML = "Good afternoon";
+  } else{
+      document.getElementById("demo").innerHTML = "Good night";
+  }
+
+  function logic1(){
+    var d = 70;
+    return d;
+  }
+  if(logic1()<60){
+    document.getElementById("link1").innerHTML = "https://www.nhs.uk/conditions/autism/signs/";
+  }else{
+    document.getElementById("link1").innerHTML = "https://www.nhs.uk/conditions/stress-anxiety-depression/feel-better-and-happy/";
+  }
+
+  function logic2(){
+    var d = 70;
+    return d;
+  }
+  if(logic1()<60){
+    document.getElementById("link2").innerHTML = "https://www.nhs.uk/conditions/autism/signs/";
+  }else{
+    document.getElementById("link2").innerHTML = "https://www.nhs.uk/conditions/stress-anxiety-depression/feel-better-and-happy/";
+  }
+
+  function logic3(){
+    var d = 70;
+    return d;
+  }
+  if(logic1()<60){
+    document.getElementById("link3").innerHTML = "https://www.nhs.uk/conditions/autism/signs/";
+  }else{
+    document.getElementById("link3").innerHTML = "https://www.nhs.uk/conditions/stress-anxiety-depression/feel-better-and-happy/";
+  }
+
+
+</script>
+
+</body>
+</html>
