@@ -23,13 +23,16 @@
   function validateForm(data) {
     var un = document.myForm.inputEmail.value;
     var pw = document.myForm.inputPassword.value;
-    var username = data[0].Email;
-    var password = data[0].Password;
-    if ((un == username) && (pw == password)) {
-      window.location.href = "front_page_adjusted.html";
+    var i;
+    var found = false;
+    for (i = 0; i < data.length; i++) {
+      if ((un == data[i].Email) && (pw == data[i].Password)) {
+        window.location.href = "front_page_adjusted.html";
+        found = true;
+      }
     }
-    else {
-      alert ("Login was unsuccessful, please check your username and password");
+    if(!found){
+        alert ("Login was unsuccessful, please check your username and password");
     }
   }
 
