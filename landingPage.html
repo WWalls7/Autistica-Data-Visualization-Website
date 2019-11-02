@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+<script>var text = window.location.hash.substring(1); //Username for the logged in User</script>
 
 <div class="card" style="height:70">
     <img src="autistica.jpg" alt="Autistica logo"  width="250" height=auto>
@@ -15,7 +16,7 @@
 <div class='column1'>
   <div class='card'>
 <div class="tab">
-    <button class="tablinks" onclick="openGraph(event, 'MentalHealth')">Mental Health</button>
+    <button class="tablinks" onclick="openGraph(event, 'MentalHealth')">Personal Mental Health</button>
     <button class="tablinks" onclick="openGraph(event, 'Confidence')">Work Self Confidence</button>
     <button class="tablinks" onclick="openGraph(event, 'Culture')">Organisational Culture</button>
 </div>
@@ -25,7 +26,7 @@
     <div class='graphCard'>
         <h3>Mental Health</h3>
         <canvas id = 'MentalHealthChart'></canvas>
-       <input type="range" min="1" max="25" value="25" class="slider" id="myRange">
+       <input type="range" min="1" max="25" value="25" class="slider" id="MentalHealthSlider">
         <canvas id = 'MentalHealthLineChart'></canvas>
     </div>
 </div>
@@ -34,7 +35,7 @@
   <div class='graphCard'>
     <h3>Work Self Confidence</h3>
     <canvas id = 'ConfidenceChart'></canvas>
-    <input type="range" min="1" max="25" value="25" class="slider" id="myRange">
+    <input type="range" min="1" max="25" value="25" class="slider" id="ConfidenceSlider">
     <canvas id = 'ConfidenceLineChart'></canvas>
   </div>
 </div>
@@ -43,7 +44,7 @@
   <div class='graphCard'>
     <h3>Organisational Culture</h3>
     <canvas id = 'CultureChart'></canvas>
-    <input type="range" min="1" max="25" value="25" class="slider" id="myRange">
+    <input type="range" min="1" max="25" value="25" class="slider" id="CultureSlider">
     <canvas id = 'CultureLineChart'></canvas>
   </div>
 </div>
@@ -51,9 +52,9 @@
 </div>
 
 <div class='column2'>
-  <div class='card'>
+    <div class='card' style="margin-left: 10px;">
     <h3>Adjustment</h3>
-    <p>Text Here</p>
+    <p id="adjustment" style="font-size:18px"></p>
   </div>
 </div>
 
@@ -99,28 +100,29 @@ function getMentalHealthData(x){
 
 
    }).then(function(data){
-       console.log(data[x])
        MentalHealthDataSet.datasets[0].data = [data[x].depression, data[x].anxiety, data[x].stress];
        MentalHealthRadarChart.update();
       // do something
    });
 }
 
-function getOrganisationalCulture(){
+function getOrganisationalCulture(x){
 
-    d3.csv(("Organisational-culture-Table1.csv").url(), function(d){
+    d3.csv("Organisational-culture-Table1.csv", function(d){
 
     return{
-        data : d.Date,
+        date : d.Date,
         average : +d.Average
     };
 
     }).then(function(data){
+        CultureDataSet.datasets[0].data = [data[x].average];
+        CultureBarChart.update();
         // do something here
     });
 }
 
-  function getSelfConfidence(){
+  function getSelfConfidence(x){
       d3.csv("How_rate_your_confidence-Table1.csv", function(d){
 
       return{
@@ -136,26 +138,44 @@ function getOrganisationalCulture(){
       };
 
       }).then(function(data){
-
+          ConfidenceDataSet.datasets[0].data = [data[x].learning, data[x].problemSolving, data[x].pressure, data[x].roleExpectation, data[x].teamwork, data[x].sensitivity, data[x].workPolitics];
+          ConfidenceRadarChart.update();
       // do something here
       });
 
   }
-
+var questionLists =["Over the last week, or since you last completed this question, please provide reflections about any misunderstandings you have experienced in the workplace, why you think they occurred, and how you think they were (or could be) successfully resolved? (please remember not to use real names of people you work with)",
+"Over the last week, or since you last completed this question, please provide reflections about any successes you have experienced in the workplace? (please remember not to use real names of people you work with)",
+"Please describe any adjustments (i.e. physcial changes to your workspace, management changes to the processes for completing tasks, or logistical changes to working hours or transport to work)",
+"If you have encountered any stories about autism in the media, could you describe them and its impact on you?",
+"Any other reflections that you would like to share? (please remember not to use real names of people you work with)"
+];
   function getAdjustment(){
       d3.csv("Autistica-8211-Adjustments.csv", function(d){
 
       return{
           data : d.Date,
-
+          q1 : d.Q1,
+          q2 : d.Q2,
+          q3 : d.Q3,
+          q4 : d.Q4,
+          q5 : d.Q5
       };
 
       }).then(function(data){
           // do something here
+      document.getElementById("adjustment").innerHTML = questionLists[0] + "<br><br>" + data[0].q1 + "<br><br><br><br>" + questionLists[1] + "<br><br>" + data[0].q2 + "<br><br><br><br>" + questionLists[2] + "<br><br>" + data[0].q4 + "<br><br><br><br>" + questionLists[3] + "<br><br>" + data[0].q4 + "<br><br><br><br>" +
+              questionLists[4] + "<br><br>" + data[0].q5;
+
+
+
+
       });
+
 
   }
 
+getAdjustment();
 
 var MentalHealthChartVar = document.getElementById('MentalHealthChart');
 var ConfidenceChartVar = document.getElementById('ConfidenceChart');
@@ -164,26 +184,6 @@ var CultureChartVar = document.getElementById('CultureChart');
 var MentalHealthctx = document.getElementById("MentalHealthLineChart").getContext('2d');
 var Confidencectx = document.getElementById("ConfidenceLineChart").getContext('2d');
 var Culturectx = document.getElementById("CultureLineChart").getContext('2d');
-
-
-var MentalHealthLineChart = new Chart(MentalHealthctx, {
-    type: 'line',
-    data: {
-        labels: ["January",	"February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        datasets: [{
-            label: 'Series 1', // Name the series
-            data: [3, 4, 2,	5, 9, 1, 2, 6, 2.5, 3, 7, 6], // Specify the data values array
-            fill: false,
-            borderColor: 'rgb(178, 76, 90)', // Add custom color border (Line)
-            backgroundColor: 'rgb(178, 76, 90)', // Add custom color background (Points and Fill)
-            borderWidth: 1 // Specify bar border width
-        }]},
-    options: {
-      responsive: true, // Instruct chart js to respond nicely.
-      maintainAspectRatio: true, // Add to prevent default behaviour of full-width/height
-    }
-});
-
 
 
 var ConfidenceLineChart = new Chart(Confidencectx, {
@@ -234,6 +234,16 @@ var CultureLineChart = new Chart(Culturectx, {
         }
     };
 
+    baroptions = {
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    offsetGridLines: true
+                }
+            }]
+        }
+    };
+
     var MentalHealthDataSet = {
         labels: ["Depression", "Anxiety", "Stress"],
         datasets: [{
@@ -246,15 +256,28 @@ var CultureLineChart = new Chart(Culturectx, {
 
     getMentalHealthData(24);
 
-    var CultureDataSet = {
+    var ConfidenceDataSet = {
         labels: ["Learning", "Problem Solving", "Pressure", "Role Expectations", "Teamwork", "Sensitivity", "Work Politics"],
         datasets: [{
             label: "entry",
             backgroundColor: "rgba(157, 213, 203, 0.1)",
             borderColor: "rgba(157, 213, 203, 1)",
-            data: [5, 4, 6, 7, 2, 1, 3.5]
+            data: []
         }]
     };
+
+    getSelfConfidence(24);
+
+    var CultureDataSet = {
+        datasets: [{
+            label: "entry",
+            backgroundColor: "rgba(157, 213, 203, 1)",
+            borderColor: "rgba(157, 213, 203, 1)",
+            data: []
+        }]
+    }
+
+    getOrganisationalCulture(24);
 
     var MentalHealthRadarChart = new Chart(MentalHealthChartVar, {
         type: 'radar',
@@ -262,56 +285,32 @@ var CultureLineChart = new Chart(Culturectx, {
         options: options
     });
 
-    var ConfidenceRadarChart = new Chart(ConfidenceChartVar, {
+    var CultureBarChart = new Chart(CultureChartVar, {
         type: 'bar',
-          data: {
-            labels: ["Average"],
-            datasets: [{
-              label: 'Average',
-              data: [9],
-              backgroundColor: [
-                'rgba(233, 185, 165, 0.3)'
-              ],
-              borderColor: [
-                'rgba(233, 185, 165, 1)',
-              ],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            responsive: false,
-            scales: {
-              xAxes: [{
-                ticks: {
-                  maxRotation: 90,
-                  minRotation: 80
-                }
-              }],
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
-            }
-          }
-        });
-
-    var CultureRadarChart = new Chart(CultureChartVar, {
-        type: 'radar',
         data: CultureDataSet,
+        options: baroptions
+    });
+
+    var ConfidenceRadarChart = new Chart(ConfidenceChartVar, {
+        type: 'radar',
+        data: ConfidenceDataSet,
         options: options
     });
 
-    var slider = document.getElementById('myRange');
-    var output = document.getElementById('demo');
-    output.innerHTML = slider.value;
+    var slider = document.getElementById('MentalHealthSlider');
 
     slider.oninput=function() {
         getMentalHealthData(slider.value-1);
-        ConfidenceDataSet.datasets[0].data = [10];
-        CultureDataSet.datasets[0].data = [10, 2, 9, 1, 8, 4, 7];
-        ConfidenceRadarChart.update();
-        CultureRadarChart.update();
+    }
+
+    var slider2 = document.getElementById('ConfidenceSlider');
+    slider2.oninput=function() {
+       getSelfConfidence(slider2.value-1);
+    }
+
+    var slider3 = document.getElementById('CultureSlider');
+    slider3.oninput=function() {
+        getOrganisationalCulture(slider3.value-1);
     }
 </script>
 
