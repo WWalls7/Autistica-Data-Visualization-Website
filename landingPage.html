@@ -97,7 +97,7 @@ function getMentalHealthData(x){
         }
 
 
-   }).then(function(data)
+   }).then(function(data) {
        MentalHealthDataSet.datasets[0].data = [data[x].depression, data[x].anxiety, data[x].stress];
        MentalHealthRadarChart.update();
       // do something
@@ -157,11 +157,11 @@ function getOrganisationalCulture(x){
 
       }).then(function(data){
           // do something here
-            
+
         document.getElementById("adjustment").innerHTML = "dsadsdsa";
-              
+
       });
-      
+
 
   }
     document.getElementById("adjustment").innerHTML = "dsadsdsa";
